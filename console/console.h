@@ -11,6 +11,7 @@ void printDecodedCommand (int value);
 void printFlags (void);
 void printTerm (void);
 void printKeys (void);
+void printBigCell (void);
 
 void printTui (void);
 

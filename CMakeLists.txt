@@ -7,10 +7,14 @@ project(computer_architecture)
 add_executable(simpleComputer
     console/main.c)
 
-target_link_libraries(simpleComputer PRIVATE console mySimpleComputer myTerm)
+target_link_libraries(simpleComputer PRIVATE console mySimpleComputer myTerm myBigChars)
+
+add_executable(fontCreator
+    console/font.c)
 
 add_library(console STATIC
     console/printAccumulator.c
+    console/printBigCell.c
     console/printCell.c
     console/printCommand.c
     console/printCounters.c
@@ -61,3 +65,16 @@ add_library(myTerm STATIC
     myTerm/mt_variables.c)
 
 target_include_directories(myTerm PUBLIC include)
+
+add_library(myBigChars STATIC
+    myBigChars/bc_box.c
+    myBigChars/bc_getBigCharPosition.c
+    myBigChars/bc_printA.c
+    myBigChars/bc_printBigChar.c
+    myBigChars/bc_readBigChar.c
+    myBigChars/bc_setBigCharPosition.c
+    myBigChars/bc_strlen.c
+    myBigChars/bc_variables.c
+    myBigChars/bc_writeBigChar.c)
+
+target_include_directories(myBigChars PUBLIC include)

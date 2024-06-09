@@ -1,18 +1,40 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 
+#include "../include/myBigChars.h"
 #include "../include/mySimpleComputer.h"
 #include "../include/myTerm.h"
 #include "console.h"
 
 int
-main (void)
+main (const int argc, char *argv[])
 {
   /*!
    * Change the output stream to unbuffered (line buffered by default) on
    * POSIX-compatible systems
    */
   setbuf (stdout, NULL);
+
+  /* Reading font file for big chars */
+  const char *font_file = (argc > 1) ? argv[1] : "font.bin";
+  const int fd = open (font_file, O_RDONLY);
+
+  if (fd == -1)
+    {
+      perror (font_file);
+      return -1;
+    }
+
+  const int bytes_read = read (fd, char_patterns, sizeof (char_patterns));
+
+  if (bytes_read != sizeof (char_patterns))
+    {
+      fprintf (stderr, "%s: File data is not valid\n", font_file);
+      return -1;
+    }
+
+  close (fd);
 
   if (!isatty (fileno (stdout)))
     {
@@ -36,7 +58,7 @@ main (void)
 
   /* Computer initialization */
   sc_reset ();
-
+  sc_memorySet (0, 129);
   int flag_clock_pulses_ignore;
 
   sc_regGet (CLOCK_PULSES_IGNORE, &flag_clock_pulses_ignore);
