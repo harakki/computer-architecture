@@ -1,59 +1,51 @@
 #include <stdio.h>
+#include <unistd.h>
 
 #include "../include/mySimpleComputer.h"
+#include "../include/myTerm.h"
 #include "console.h"
 
 int
 main (void)
 {
-  sc_memoryInit ();
-  sc_accumulatorInit ();
-  sc_icounterInit ();
-  sc_regInit ();
+  /*!
+   * Change the output stream to unbuffered (line buffered by default) on
+   * POSIX-compatible systems
+   */
+  setbuf (stdout, NULL);
 
-  for (int i = 0; i < RAM_SIZE; ++i)
+  if (!isatty (fileno (stdout)))
     {
-      sc_memorySet (i, 0);
+      perror ("Terminal initialization failed");
+      return -1;
     }
 
-  printf ("RAM data:\n");
-  for (int i = 0; i < 13; ++i)
+  int rows;
+  int cols;
+
+  mt_getScreenSize (&rows, &cols);
+
+#if defined NDEBUG
+  if (rows < 25 || cols < 109)
     {
-      for (int j = 0; j < 10; ++j)
-        {
-          printCell (i * 10 + j);
-          printf (" ");
-        }
-      printf ("\n");
+      fprintf (stderr, "Terminal initialization failed: Small viewport size"
+                       " (requires at least 110x25)\n");
+      return -1;
     }
+#endif
 
-  printf ("Flag register: ");
-  printFlags ();
-  printf ("\n");
+  /* Computer initialization */
+  sc_reset ();
 
-  printf ("Accumulator: ");
-  printAccumulator ();
-  printf ("\n");
+  int flag_clock_pulses_ignore;
 
-  printf ("Command counter: ");
-  printCounters ();
-  printf ("\n");
+  sc_regGet (CLOCK_PULSES_IGNORE, &flag_clock_pulses_ignore);
 
-  printf ("Cell data formats: ");
-  printDecodedCommand (0);
-  printf ("\n");
+  printTui ();
 
-  printf ("Return of applying an invalid value to a RAM cell: %i\n",
-          sc_memorySet (1000, -7));
-
-  printf ("Return of applying an invalid value to a flags register: %i\n",
-          sc_regSet (1, 9));
-
-  printf ("Return of applying an invalid value to a accumulator: %i\n",
-          sc_accumulatorSet (-1000 - 7));
-
-  printf ("Return of applying an invalid value to a command counter: %i\n",
-          sc_icounterSet (-1000 - 7));
+  /* Set cursor to the end of output to display shell correctly */
+  mt_gotoXY (1, rows);
+  mt_setDefaultColor ();
 
   return 0;
 }

@@ -3,10 +3,16 @@
 #include <stdio.h>
 
 #include "../include/mySimpleComputer.h"
+#include "../include/myTerm.h"
 
 void
-printCell (int address)
+printCell (int address, enum colors fg, enum colors bg)
 {
+  mt_setFgColor (fg);
+  mt_setBgColor (bg);
+
+  mt_calculatePosition (address, 6, 10, 1, 1);
+
   if (address >= 0 && address < RAM_SIZE)
     {
       int sign = 0;

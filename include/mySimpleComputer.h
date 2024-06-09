@@ -50,10 +50,6 @@ int sc_commandValidate (int command);
 int sc_commandEncode (int sign, int command, int operand, int *value);
 int sc_commandDecode (int value, int *sign, int *command, int *operand);
 
-void sc_cacheInit (void);
-void sc_cacheUpdate (int address, int *value);
-int sc_getOldestInCache (void);
-
 void sc_reset (void);
 
 #endif /* MY_SIMPLE_COMPUTER_H */

@@ -1,4 +1,4 @@
-TARGET   := pr02
+TARGET   := simpleComputer
 TARGET2  := console.a
 
 BINDIR   := $(DESTDIR)/bin
