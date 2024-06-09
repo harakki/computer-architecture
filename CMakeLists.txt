@@ -13,6 +13,9 @@ add_executable(fontCreator
     console/font.c)
 
 add_library(console STATIC
+    console/ALU.c
+    console/CU.c
+    console/IRC.c
     console/printAccumulator.c
     console/printBigCell.c
     console/printCell.c

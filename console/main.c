@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -57,6 +58,8 @@ main (const int argc, char *argv[])
 
   /* Computer initialization */
   sc_reset ();
+  signal (SIGALRM, IRC);
+  signal (SIGUSR1, IRC);
 
   rk_saveMyTerm ();
 

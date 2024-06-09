@@ -129,10 +129,15 @@ processInput (enum keys key, int *exit_flag)
       }
     case RUN_KEY:
       {
+        sc_regInit ();
+        sc_regSet (CLOCK_PULSES_IGNORE, 0);
+        raise (SIGALRM);
         break;
       }
     case STEP_KEY:
       {
+        CU ();
+        sc_icounterGet ((int *)&selected_cell);
         break;
       }
     case RESET_KEY:
