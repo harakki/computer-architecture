@@ -1,6 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
+#include "../include/myReadKey.h"
 #include "../include/myTerm.h"
 
 void printAccumulator (void);
@@ -14,5 +15,6 @@ void printKeys (void);
 void printBigCell (void);
 
 void printTui (void);
+void processInput (enum keys key, int *exit_flag);
 
 #endif /* CONSOLE_H */

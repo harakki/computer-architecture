@@ -4,7 +4,6 @@
 
 #include "../include/myBigChars.h"
 #include "../include/mySimpleComputer.h"
-#include "../include/myTerm.h"
 #include "console.h"
 
 int
@@ -58,12 +57,28 @@ main (const int argc, char *argv[])
 
   /* Computer initialization */
   sc_reset ();
-  sc_memorySet (0, 129);
+
+  rk_saveMyTerm ();
+
+  int exit_flag = 0;
   int flag_clock_pulses_ignore;
+  enum keys key;
 
-  sc_regGet (CLOCK_PULSES_IGNORE, &flag_clock_pulses_ignore);
+  while (!exit_flag)
+    {
+      sc_regGet (CLOCK_PULSES_IGNORE, &flag_clock_pulses_ignore);
 
-  printTui ();
+      if (!flag_clock_pulses_ignore)
+        {
+          continue;
+        }
+
+      printTui ();
+
+      rk_readKey (&key);
+
+      processInput (key, &exit_flag);
+    }
 
   /* Set cursor to the end of output to display shell correctly */
   mt_gotoXY (1, rows);

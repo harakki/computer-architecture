@@ -7,7 +7,7 @@ project(computer_architecture)
 add_executable(simpleComputer
     console/main.c)
 
-target_link_libraries(simpleComputer PRIVATE console mySimpleComputer myTerm myBigChars)
+target_link_libraries(simpleComputer PRIVATE console mySimpleComputer myTerm myBigChars myReadKey)
 
 add_executable(fontCreator
     console/font.c)
@@ -22,7 +22,8 @@ add_library(console STATIC
     console/printFlags.c
     console/printKeys.c
     console/printTerm.c
-    console/printTui.c)
+    console/printTui.c
+    console/processInput.c)
 
 target_include_directories(console PUBLIC console)
 
@@ -78,3 +79,12 @@ add_library(myBigChars STATIC
     myBigChars/bc_writeBigChar.c)
 
 target_include_directories(myBigChars PUBLIC include)
+
+add_library(myReadKey STATIC
+    myReadKey/rk_myTermRegime.c
+    myReadKey/rk_readKey.c
+    myReadKey/rk_readValue.c
+    myReadKey/rk_restoreMyTerm.c
+    myReadKey/rk_saveMyTerm.c)
+
+target_include_directories(myReadKey PUBLIC include)
