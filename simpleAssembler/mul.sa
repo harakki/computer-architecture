@@ -1,0 +1,7 @@
+0 READ 127 ; Input `A`
+1 READ 126 ; Input `B`
+2 LOAD 127 ; Load `A` into accumulator
+3 MUL 126 ; Multiply accumulator (`A`) by `B`
+4 STORE 125 ; Save result in `C`
+5 WRITE 125 ; Print `C`
+6 HALT 0 ; END
