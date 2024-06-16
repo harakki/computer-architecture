@@ -1,17 +1,21 @@
 DESTDIR   := build
 
 CFLAGS    := -Wall -Wextra -O2
+CXXFLAGS  := -Wall -Wextra -O2
 
 RM        := rm -rf
 MAKEFLAGS := --no-print-directory
 
-all: simpleComputer fontCreator
+all: simpleComputer fontCreator basic
 
 simpleComputer: lib_simple_computer lib_term lib_big_chars lib_read_key
 	$(MAKE) -C console simpleComputer CFLAGS="$(CFLAGS)" DESTDIR="../$(DESTDIR)" LIB="../mySimpleComputer/build/mySimpleComputer.a ../myTerm/build/myTerm.a ../myBigChars/build/myBigChars.a ../myReadKey/build/myReadKey.a"
 
 fontCreator:
 	$(MAKE) -C console fontCreator CFLAGS="$(CFLAGS)" DESTDIR="../$(DESTDIR)"
+
+basic:
+	$(MAKE) -C simpleBasic basic CXXFLAGS="$(CXXFLAGS)" DESTDIR="../$(DESTDIR)"
 
 lib_simple_computer:
 	$(MAKE) -C mySimpleComputer CC="$(CC)" CFLAGS="$(CFLAGS)"

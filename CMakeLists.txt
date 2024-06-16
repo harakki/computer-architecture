@@ -12,6 +12,10 @@ target_link_libraries(simpleComputer PRIVATE console mySimpleComputer myTerm myB
 add_executable(fontCreator
     console/font.c)
 
+add_executable(basic
+    simpleBasic/main.cpp
+    simpleBasic/classes.cpp)
+
 add_library(console STATIC
     console/ALU.c
     console/CU.c

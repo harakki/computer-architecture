@@ -1,0 +1,9 @@
+10 REM Factorial calculation
+20 LET C = 1
+30 LET R = 1
+40 INPUT F
+50 LET R = R * F
+60 LET F = F - C
+70 IF F > 0 GOTO 50
+80 PRINT F
+90 END
