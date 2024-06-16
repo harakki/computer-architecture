@@ -38,6 +38,7 @@ printTui (void)
   printCounters ();
   printCommand ();
   printBigCell ();
+  printCache ();
   printTerm ();
   printKeys ();
 

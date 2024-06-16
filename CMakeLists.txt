@@ -18,6 +18,7 @@ add_library(console STATIC
     console/IRC.c
     console/printAccumulator.c
     console/printBigCell.c
+    console/printCache.c
     console/printCell.c
     console/printCommand.c
     console/printCounters.c
@@ -34,6 +35,8 @@ add_library(mySimpleComputer STATIC
     mySimpleComputer/sc_accumulatorGet.c
     mySimpleComputer/sc_accumulatorInit.c
     mySimpleComputer/sc_accumulatorSet.c
+    mySimpleComputer/sc_cacheInit.c
+    mySimpleComputer/sc_cacheUpdate.c
     mySimpleComputer/sc_commandDecode.c
     mySimpleComputer/sc_commandEncode.c
     mySimpleComputer/sc_commandValidate.c

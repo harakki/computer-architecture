@@ -11,6 +11,7 @@ sc_memorySet (int address, int value)
     }
 
   random_access_memory[address] = value;
+  sc_cacheUpdate (address, &value);
 
   return 0;
 }
