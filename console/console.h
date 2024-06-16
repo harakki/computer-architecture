@@ -60,6 +60,7 @@ void printFlags (void);
 void printTerm (void);
 void printKeys (void);
 void printBigCell (void);
+void printCache (void);
 
 void printTui (void);
 void processInput (enum keys key, int *exit_flag);

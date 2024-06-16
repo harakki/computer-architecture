@@ -11,5 +11,6 @@ sc_reset (void)
   sc_accumulatorInit ();
   sc_regInit ();
   sc_icounterInit ();
+  sc_cacheInit ();
   mt_termInit ();
 }

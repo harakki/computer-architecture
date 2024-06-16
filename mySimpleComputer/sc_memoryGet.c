@@ -10,7 +10,7 @@ sc_memoryGet (int address, int *value)
       return -1;
     }
 
-  *value = random_access_memory[address];
+  sc_cacheUpdate (address, value);
 
   return 0;
 }
