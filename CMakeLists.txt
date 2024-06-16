@@ -15,6 +15,10 @@ add_executable(fontCreator
 add_executable(assembler
     simpleAssembler/main.cpp)
 
+add_executable(basic
+    simpleBasic/main.cpp
+    simpleBasic/classes.cpp)
+
 add_library(console STATIC
     console/ALU.c
     console/CU.c
